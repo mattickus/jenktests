@@ -10,11 +10,11 @@ pipeline {
   post {
     failure {
       echo "It was a failure"
-      step([$class: 'GitHubPRBuildStatusPublisher', statusMsg: [content: '${GITHUB_PR_COND_REF}'], unstableAs: 'FAILURE'])
+      step([$class: 'GitHubPRBuildStatusPublisher', statusMsg: [content: 'failed'], unstableAs: 'FAILURE'])
     }
     success {
       echo "It was a success"
-      step([$class: 'GitHubPRBuildStatusPublisher', statusMsg: [content: '${GITHUB_PR_COND_REF}'], unstableAs: 'FAILURE'])
+      step([$class: 'GitHubPRBuildStatusPublisher', statusMsg: [content: 'success'], unstableAs: 'FAILURE'])
     }
   }
 }
