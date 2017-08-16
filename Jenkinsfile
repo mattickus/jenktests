@@ -10,11 +10,11 @@ pipeline {
   post {
     failure {
       echo "It was a failure"
-      step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
+      step([$class: 'GitHubPRBuildStatusPublisher', statusMsg: [content: '${GITHUB_PR_COND_REF} run ended'], statusVerifier: [buildStatus: 'SUCCESS'], unstableAs: 'FAILURE'])
     }
     success {
       echo "It was a success"
-      step([$class: 'GitHubPRBuildStatusPublisher', buildMessage: [failureMsg: [content: 'Can\'t set status; build failed.'], successMsg: [content: 'Can\'t set status; build succeeded.']], statusMsg: [content: '${GITHUB_PR_COND_REF} run ended'], unstableAs: 'FAILURE'])
+      step([$class: 'GitHubPRBuildStatusPublisher', statusMsg: [content: '${GITHUB_PR_COND_REF} run ended'], statusVerifier: [buildStatus: 'SUCCESS'], unstableAs: 'FAILURE'])
     }
   }
 }
