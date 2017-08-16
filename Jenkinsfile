@@ -7,14 +7,7 @@ pipeline {
       }
     }
   }
-  post {
-    failure {
-      echo "It was a failure"
-      step([$class: 'GitHubCommitStatusSetter'])
-    }
-    success {
-      echo "It was a success"
-      step([$class: 'GitHubCommitStatusSetter'])
-    }
+  stage("set status") {
+    step([$class: 'GitHubCommitStatusSetter'])
   }
 }
