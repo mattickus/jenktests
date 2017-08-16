@@ -14,7 +14,7 @@ pipeline {
     }
     success {
       echo "It was a success"
-      step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
+      step([$class: 'GitHubPRBuildStatusPublisher', buildMessage: [failureMsg: [content: 'Can\'t set status; build failed.'], successMsg: [content: 'Can\'t set status; build succeeded.']], statusMsg: [content: '${GITHUB_PR_COND_REF} run ended'], unstableAs: 'FAILURE'])
     }
   }
 }
