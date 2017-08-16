@@ -7,7 +7,9 @@ pipeline {
       }
     }
     stage("set status") {
-      step([$class: 'GitHubCommitStatusSetter'])
+      steps {
+        step([$class: 'GitHubCommitStatusSetter'])
+      }
     }
   }
 }
