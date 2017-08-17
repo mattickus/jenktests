@@ -15,7 +15,7 @@ pipeline {
   stages {
     stage("build") {
       steps {
-        setBuildStatus("In Progress","PENDING","context","${gitCommit}")
+        setBuildStatus("In Progress","PENDING","context","commit")
         echo "hello world!!!"
       }
     }
