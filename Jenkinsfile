@@ -1,7 +1,9 @@
 pipeline{
   agent any
-  def theStatus = 'SUCCESS'
-  def theComment = 'Successful'
+  environment {
+    def theStatus = 'SUCCESS'
+    def theComment = 'Successful'
+  }
   stages {
     stage("Test Puppet") {
       steps {
