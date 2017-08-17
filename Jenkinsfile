@@ -22,7 +22,7 @@ pipeline {
     stage("status") {
       steps {
         echo "${currentBuild.result}"
-        step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Successful", state: ${currentBuild.result}]]]])
+        step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Successful", state: "${currentBuild.result}"]]]])
       }
     }
   }
