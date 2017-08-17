@@ -6,12 +6,6 @@ pipeline{
         echo "hello world!!!"
       }
     }
-    stage("status") {
-      steps {
-        echo "${currentBuild.result}"
-        sh 'lsaa'
-      }
-    }
   }
   post {
     success {
