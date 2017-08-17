@@ -6,6 +6,11 @@ pipeline {
         echo "hello world!!!"
       }
     }
+    stage("status") {
+      steps {
+        echo "hello world 2"
+      }
+    }
   }
-  step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: 'BetterThanOrEqualBuildResult', message: 'Success!', result: 'SUCCESS', state: 'SUCCESS']]]])
+  setBuildStatus("Build complete", "SUCCESS");
 }
