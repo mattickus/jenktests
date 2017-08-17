@@ -21,7 +21,7 @@ pipeline{
     stage("status") {
       steps {
         echo "${currentBuild.result}"
-        sh 'ls -ldfdasfsdfs'
+        sh 'lll'
       }
     }
   }
