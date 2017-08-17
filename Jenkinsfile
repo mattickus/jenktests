@@ -14,15 +14,15 @@ pipeline {
   agent any
   stages {
     stage("build") {
-      steps {
-        try {
-          step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
-          echo "hello world!!!"
-          currentBuild.result = 'SUCCESS'
-        } catch (Exception err) {
+      try {
+        steps {
+            step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
+            echo "hello world!!!"
+            currentBuild.result = 'SUCCESS'
+        }
+      } catch (Exception err) {
           currentBuild.result = 'FAILURE'
-        }  
-      }
+      }  
     }
     stage("status") {
       steps {
