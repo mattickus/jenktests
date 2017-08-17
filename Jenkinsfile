@@ -9,7 +9,7 @@ pipeline{
     stage("status") {
       steps {
         echo "${currentBuild.result}"
-        sh 'ls -l'
+        sh 'lsaa'
       }
     }
   }
