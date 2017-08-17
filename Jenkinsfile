@@ -1,5 +1,7 @@
 pipeline{
   agent any
+  def theStatus = 'SUCCESS'
+  def theComment = 'Successful'
   stages {
     stage("Test Puppet") {
       steps {
@@ -14,12 +16,12 @@ pipeline{
   }
   post {
     success {
-      def theStatus = 'SUCCESS'
-      def theComment = 'Successful'
+      theStatus = 'SUCCESS'
+      theComment = 'Successful'
     }
     failure {
-      def theStatus = 'FAILURE'
-      def theComment = 'Failed'
+      theStatus = 'FAILURE'
+      theComment = 'Failed'
     }
     always {
       sh 'echo Done!'
