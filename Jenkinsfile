@@ -1,9 +1,14 @@
 pipeline{
   agent any
   stages {
-    stage("build") {
+    stage("Test Puppet") {
       steps {
         sh '/usr/local/bin/puppet parser validate .'
+      }
+    }
+    stage("Test YAML") {
+      steps {
+        sh '/bin/find . -name "*.yml" -exec /usr/bin/ruby  -e "require 'yaml';puts YAML.load_file('{}')" +'
       }
     }
   }
