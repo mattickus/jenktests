@@ -1,7 +1,7 @@
 def setBuildStatus(String message, String state, String context, String sha) {
   step([
       $class: "GitHubCommitStatusSetter",
-      reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/<yourRepoURL>"],
+      reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/mattickus/jenktests"],
       contextSource: [$class: "ManuallyEnteredCommitContextSource", context: context],
       errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
       commitShaSource: [$class: "ManuallyEnteredShaSource", sha: sha ],
