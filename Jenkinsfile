@@ -19,6 +19,7 @@ pipeline {
           step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
           echo "hello world!!!"
           currentBuild.result = 'SUCCESS'
+        }
       }
     }
   } catch (Exception err) {
