@@ -4,7 +4,7 @@ pipeline{
     stage("Test Puppet") {
       steps {
         sh '/usr/local/bin/puppet parser validate .'
-        sh '/bin/find . -name \"*.yml\" -exec /usr/bin/ruby  -e \"require 'yaml';puts YAML.load_file('{}')\" +'
+        sh '/usr/bin/yamllint .'
       }
     }
     stage("Test YAML") {
