@@ -22,8 +22,8 @@ pipeline {
     stage("status") {
       steps {
         echo "hello world 2"
-        setBuildStatus("Complete","FAILURE","context","${gitCommit}")
-        setBuildStatus("Complete","SUCCESS","context","${gitCommit}")
+        setBuildStatus("Complete","FAILURE","context","commit")
+        setBuildStatus("Complete","SUCCESS","context","commit")
       }
     }
   }
