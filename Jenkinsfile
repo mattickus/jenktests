@@ -1,4 +1,5 @@
-def setBuildStatus(String message, String state, String context, String sha) {
+pipeline {
+  def setBuildStatus(String message, String state, String context, String sha) {
     step([
         $class: "GitHubCommitStatusSetter",
         reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/<yourRepoURL>"],
@@ -8,9 +9,7 @@ def setBuildStatus(String message, String state, String context, String sha) {
         statusBackrefSource: [$class: "ManuallyEnteredBackrefSource", backref: "${BUILD_URL}flowGraphTable/"],
         statusResultSource: [$class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
     ]);
-}
-
-pipeline {
+  }
   agent any
   stages {
     stage("build") {
