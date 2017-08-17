@@ -22,11 +22,11 @@ pipeline {
     stage("status") {
       steps {
         echo "hello world 2"
+        setBuildStatus("Complete","FAILURE",jobContext,"${gitCommit}")
+        setBuildStatus("Complete","SUCCESS",jobContext,"${gitCommit}")
       }
     }
   }
-  setBuildStatus("Complete","FAILURE",jobContext,"${gitCommit}")
-  setBuildStatus("Complete","SUCCESS",jobContext,"${gitCommit}")
 }
 
 
