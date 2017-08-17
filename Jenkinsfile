@@ -4,12 +4,11 @@ pipeline{
     stage("Test Puppet") {
       steps {
         sh '/usr/local/bin/puppet parser validate .'
-        sh '/usr/bin/yamllint .'
       }
     }
     stage("Test YAML") {
       steps {
-        
+        sh '/usr/bin/yamllint .'        
       }
     }
   }
