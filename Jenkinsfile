@@ -1,9 +1,14 @@
 pipeline{
   agent any
   stages {
-    stage("build") {
+    stage("Test Puppet") {
       steps {
-        echo "hello world!!!"
+        sh '/usr/local/bin/puppet parser validate .'
+      }
+    }
+    stage("Test YAML") {
+      steps {
+        sh '/usr/bin/yamllint .'        
       }
     }
   }
