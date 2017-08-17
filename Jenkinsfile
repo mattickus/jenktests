@@ -19,5 +19,8 @@ pipeline{
     failure {
       step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Failure", state: "FAILURE"]]]])
     }
+    always {
+      sh 'echo Done!'
+    }
   }
 }
