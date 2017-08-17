@@ -15,15 +15,14 @@ pipeline {
   stages {
     stage("build") {
       steps {
-        setBuildStatus("In Progress","PENDING","context","commit")
+        step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
         echo "hello world!!!"
       }
     }
     stage("status") {
       steps {
         echo "hello world 2"
-        setBuildStatus("Complete","FAILURE","context","commit")
-        setBuildStatus("Complete","SUCCESS","context","commit")
+        step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
       }
     }
   }
