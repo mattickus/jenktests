@@ -14,13 +14,16 @@ pipeline{
   }
   post {
     success {
-      step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Successful", state: "SUCCESS"]]]])
+      def theStatus = 'SUCCESS'
+      def theComment = 'Successful'
     }
     failure {
-      step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Failure", state: "FAILURE"]]]])
+      def theStatus = 'FAILURE'
+      def theComment = 'Failed'
     }
     always {
       sh 'echo Done!'
+      step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "${theComment}", state: "${theStatus}"]]]])
     }
   }
 }
