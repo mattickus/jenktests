@@ -15,15 +15,15 @@ pipeline {
   stages {
     stage("build") {
       steps {
-        setBuildStatus("In Progress","PENDING",jobContext,"${gitCommit}")
+        setBuildStatus("In Progress","PENDING",context,"${gitCommit}")
         echo "hello world!!!"
       }
     }
     stage("status") {
       steps {
         echo "hello world 2"
-        setBuildStatus("Complete","FAILURE",jobContext,"${gitCommit}")
-        setBuildStatus("Complete","SUCCESS",jobContext,"${gitCommit}")
+        setBuildStatus("Complete","FAILURE",context,"${gitCommit}")
+        setBuildStatus("Complete","SUCCESS",context,"${gitCommit}")
       }
     }
   }
