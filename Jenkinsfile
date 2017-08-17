@@ -10,26 +10,20 @@ def setBuildStatus(String message, String state, String context, String sha) {
   ]);
 }
 
-pipeline {
-  agent any
-  stages {
+node {
+  try {
     stage("build") {
-      try {
-        steps {
-            step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
-            echo "hello world!!!"
-            currentBuild.result = 'SUCCESS'
-        }
-      } catch (Exception err) {
-          currentBuild.result = 'FAILURE'
-      }  
+      step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
+      echo "hello world!!!"
+      currentBuild.result = 'SUCCESS'
     }
-    stage("status") {
-      steps {
-        echo "${currentBuild.result}"
-        step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Successful", state: "${currentBuild.result}"]]]])
-      }
-    }
+  } catch (err) {
+    currentBuild.result = 'FAILURE'
+    throw err
+  }  
+  stage("status") {
+    echo "${currentBuild.result}"
+    step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Successful", state: "${currentBuild.result}"]]]])
   }
 }
   
