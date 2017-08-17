@@ -1,9 +1,8 @@
+def theStatus
+def theComment
+
 pipeline{
   agent any
-  parameters {
-    theStatus = 'SUCCESS'
-    theComment = 'Successful'
-  }
   stages {
     stage("Test Puppet") {
       steps {
