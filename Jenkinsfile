@@ -12,7 +12,7 @@ pipeline{
     stage("Test YAML") {
       steps {
         sh '/usr/bin/yamllint .'  
-        step([$class: 'GitHubPRCommentPublisher', comment: [content: 'Build ${BUILD_NUMBER} SUCCESS!']])
+        //step([$class: 'GitHubPRCommentPublisher', comment: [content: 'Build ${BUILD_NUMBER} SUCCESS!']])
       }
     }
   }
