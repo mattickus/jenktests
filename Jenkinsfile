@@ -11,18 +11,17 @@ pipeline{
     }
     stage("Test YAML") {
       steps {
-        sh '/usr/bin/yamllint .'        
+        sh '/usr/bin/yamllint .'  
+        step([$class: 'GitHubPRCommentPublisher', comment: [content: 'Build ${BUILD_NUMBER} SUCCESS!']])
       }
     }
   }
   post {
     success {
       step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Successful", state: "SUCCESS"]]]])
-      step([$class: 'GitHubPRCommentPublisher', comment: [content: 'Build ${BUILD_NUMBER} SUCCESS!']])
     }
     failure {
       step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Failure", state: "FAILURE"]]]])
-      step([$class: 'GitHubPRCommentPublisher', comment: [content: 'Build ${BUILD_NUMBER} FAILURE!']])
     }
     always {
       sh 'env | sort'
