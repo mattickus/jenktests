@@ -15,7 +15,7 @@ pipeline{
   post {
     success {
       step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Successful", state: "SUCCESS"]]]])
-      sh echo '${BUILD_STATUS}'
+      sh 'echo ${BUILD_STATUS}'
     }
     failure {
       step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Failure", state: "FAILURE"]]]])
