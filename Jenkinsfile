@@ -1,5 +1,8 @@
 pipeline{
   agent any
+  triggers {
+    cron('H 4 1 1 1-5')
+  }
   stages {
     stage("Test Puppet") {
       steps {
@@ -8,7 +11,8 @@ pipeline{
     }
     stage("Test YAML") {
       steps {
-        sh '/usr/bin/yamllint .'        
+        sh '/usr/bin/yamllint .'  
+        //step([$class: 'GitHubPRCommentPublisher', comment: [content: 'Build ${BUILD_NUMBER} SUCCESS!']])
       }
     }
   }
@@ -20,7 +24,7 @@ pipeline{
       step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Failure", state: "FAILURE"]]]])
     }
     always {
-      sh 'echo Done!'
+      sh 'env | sort'
     }
   }
 }
