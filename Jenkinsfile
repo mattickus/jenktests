@@ -1,6 +1,3 @@
-def theStatus
-def theComment
-
 pipeline{
   agent any
   stages {
@@ -17,16 +14,13 @@ pipeline{
   }
   post {
     success {
-      theStatus = 'SUCCESS'
-      theComment = 'Successful'
+      step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Successful", state: "SUCCESS"]]]])
     }
     failure {
-      theStatus = 'FAILURE'
-      theComment = 'Failed'
+      step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Failure", state: "FAILURE"]]]])
     }
     always {
       sh 'echo Done!'
-      step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "${theComment}", state: "${theStatus}"]]]])
     }
   }
 }
