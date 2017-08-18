@@ -22,7 +22,7 @@ pipeline{
       step([$class: 'GitHubPRCommentPublisher', comment: [content: 'Build ${BUILD_NUMBER} ${BUILD_STATUS}']])
     }
     always {
-      sh 'echo Done!'
+      sh 'echo Done'
     }
   }
 }
