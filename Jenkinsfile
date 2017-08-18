@@ -15,14 +15,13 @@ pipeline{
   post {
     success {
       step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Successful", state: "SUCCESS"]]]])
-      sh 'env | sort'
     }
     failure {
       step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: "AnyBuildResult", message: "Failure", state: "FAILURE"]]]])
       //step([$class: 'GitHubPRCommentPublisher', comment: [content: 'Build ${BUILD_NUMBER} ${BUILD_STATUS}']])
     }
     always {
-      sh 'echo Done'
+      sh 'env | sort'
     }
   }
 }
